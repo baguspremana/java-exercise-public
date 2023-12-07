@@ -4,7 +4,6 @@
  */
 package javaapplication3.dao;
 
-import java.util.logging.*;
 import java.util.List;
 import javaapplication3.models.Mahasiswa;
 import java.sql.*;
@@ -41,7 +40,7 @@ public class MahasiswaDao implements MahasiswaDaoInterface {
             er.printStackTrace();
         } finally {
             try {
-                cn.close();
+                ps.close();
             } catch (SQLException er) {
                 er.printStackTrace();
             }
@@ -62,7 +61,7 @@ public class MahasiswaDao implements MahasiswaDaoInterface {
             er.printStackTrace();
         } finally {
             try {
-                cn.close();
+                ps.close();
             } catch (SQLException er) {
                 er.printStackTrace();
             }
@@ -80,7 +79,7 @@ public class MahasiswaDao implements MahasiswaDaoInterface {
             er.printStackTrace();
         } finally {
             try {
-                cn.close();
+                ps.close();
             } catch (SQLException er) {
                 er.printStackTrace();
             }
@@ -106,7 +105,7 @@ public class MahasiswaDao implements MahasiswaDaoInterface {
             }
             
         } catch (SQLException er) {
-            Logger.getLogger(MahasiswaDao.class.getName()).log(Level.SEVERE, null, er);
+            er.printStackTrace();
         }
         
         return listMahasiswa;
@@ -133,7 +132,7 @@ public class MahasiswaDao implements MahasiswaDaoInterface {
                 listMahasiswa.add(m);
             }
         } catch (SQLException er) {
-            Logger.getLogger(MahasiswaDao.class.getName()).log(Level.SEVERE, null, er);
+            er.printStackTrace();
         }
         
         return listMahasiswa;
