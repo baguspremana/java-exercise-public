@@ -54,4 +54,61 @@ public class MahasiswaController {
             JOptionPane.showMessageDialog(null, "Data NIM atau Nama tidak boleh kosong!");
         }
     }
+    
+    public void setField (int index) {
+        view.getTxtNim().setText(listMahasiswa.get(index).getNim());
+        view.getTxtNama().setText(listMahasiswa.get(index).getNama());
+        view.getTxtAlamat().setText(listMahasiswa.get(index).getAlamat());
+        view.getTxtId().setText(listMahasiswa.get(index).getId().toString());
+    }
+    
+    public void update() {
+        if (!view.getTxtId().getText().trim().isEmpty()) {
+            int id = Integer.parseInt(view.getTxtId().getText());
+            
+            Mahasiswa m = new Mahasiswa();
+            m.setId(id);
+            m.setNim(view.getTxtNim().getText());
+            m.setNama(view.getTxtNama().getText());
+            m.setAlamat(view.getTxtAlamat().getText());
+            
+            dao.update(m);
+            JOptionPane.showMessageDialog(null, "Data berhasil diubah!");
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Belum ada data yang dipilih!");
+        }
+    }
+    
+    public void delete() {
+        if(!view.getTxtId().getText().trim().isEmpty()) {
+            int id = Integer.parseInt(view.getTxtId().getText());
+            String nim = view.getTxtNim().getText();
+            
+            int choice = JOptionPane.showConfirmDialog(view, 
+                    "Hapus data dengan NIM: " + nim,
+                    "Konfirmasi",
+                    JOptionPane.YES_NO_CANCEL_OPTION);
+            
+            switch(choice) {
+                case JOptionPane.YES_OPTION -> dao.delete(id);
+            }
+            
+        }  else {
+            JOptionPane.showMessageDialog(null, "Belum ada data yang dipilih!");
+        }
+    }
+    
+    public void search() {
+        if (!view.getTxtCariData().getText().trim().isEmpty()) {
+            
+            listMahasiswa = dao.search(view.getTxtCariData().getText());
+            MahasiswaTable mt = new MahasiswaTable(listMahasiswa);
+            view.tabelMahasiswa().setModel(mt);
+            
+        } else {
+            
+            JOptionPane.showMessageDialog(null, "Kolom pencarian data kosong!");
+        }
+    }
 }

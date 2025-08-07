@@ -118,9 +118,9 @@ public class MahasiswaDao implements MahasiswaDaoInterface {
         try {
             listMahasiswa = new ArrayList<Mahasiswa>();
             PreparedStatement ps = cn.prepareStatement(search);
-            ps.setString(1, keyword);
-            ps.setString(2, keyword);
-            ps.setString(3, keyword);
+            ps.setString(1, "%" +  keyword + "%");
+            ps.setString(2, "%" +  keyword + "%");
+            ps.setString(3, "%" +  keyword + "%");
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()) {
